@@ -36,7 +36,9 @@ A one-page scroll layout plus a contact subpage, per locale, generated staticall
 | `/pl/` | Polish locale — main scroll page |
 | `/en/contact/` | English contact subpage |
 | `/pl/contact/` | Polish contact subpage |
-| `/contact/` | Language detector for the contact subpage — same shared mechanism as `/`, redirecting to `/en/contact/` or `/pl/contact/` (no-JS fallback: `/en/contact/`) |
+| `/en/projects/` | English projects subpage — the full projects list |
+| `/pl/projects/` | Polish projects subpage — the full projects list |
+| `/contact/`, `/projects/` | Language detectors for the subpages — same shared mechanism as `/`, redirecting to the locale counterpart (no-JS fallback: the `en` version) |
 | `404.html` | Custom bilingual 404 page, playing on the "missing bits" theme |
 
 Changing the default locale later is a one-line config change (`astro.config` i18n `defaultLocale` + the shared detector's single fallback-locale constant); prefixed URLs stay stable either way.
@@ -45,7 +47,11 @@ Changing the default locale later is a one-line config change (`astro.config` i1
 
 1. **Hero** — logo (dark-background variant), company name, tagline, 2–3 sentences about the company and its software-services scope.
 2. **Services** — cards for the service offering (e.g. custom software development, consulting/architecture, automation & DevOps). Exact list is content, easily edited in JSON.
-3. **Projects** — hand-maintained list of selected projects linking to GitHub repositories in both the `missing-bits` organization and the `vircung` personal account. Locale-invariant data (title, repository URL, optional `category` slug, optional `tags` list of technology names rendered as chips on the card — technology names are proper nouns, never translated) lives once in a shared `src/data/projects.json`; the one-sentence descriptions and the category labels live per locale in the i18n files, keyed by slug — so the list cannot drift between locales. Entries are rendered grouped by category (per-locale subheadings); uncategorized entries form an unlabeled group first. No GitHub API involved — updating the list is a content edit. An empty list hides the whole section.
+3. **Featured projects** — a carousel (self-hosted Splide component, CSS+JS bundled at build) teasing the projects marked `featured: true`, with an "All projects →" link to the projects subpage. No featured entries → the section disappears.
+
+### Projects subpage (per locale)
+
+The full hand-maintained projects list (`/en/projects/`, `/pl/projects/`) — open-source repositories (from the `missing-bits` organization or the `vircung` personal account) and client deliveries alike; a project's `url` may point at a repository or a live product. Locale-invariant data (title, URL, optional `category` slug, optional `tags` list of technology names rendered as chips — technology names are proper nouns, never translated, plus the `featured` flag) lives once in a shared `src/data/projects.json`; the one-sentence descriptions and the category labels live per locale in the i18n files, keyed by slug — so the list cannot drift between locales. Entries render grouped by category (per-locale subheadings); uncategorized entries form an unlabeled group first. No GitHub API involved — updating the list is a content edit. An empty list hides the section.
 
 ### Contact subpage (per locale)
 
@@ -54,12 +60,12 @@ Contact lives on its own subpage (`/en/contact/`, `/pl/contact/`), not on the ma
 ### Header navigation
 
 Every page shares a header with:
-- a navbar: *Services* (anchor into the main page) and *Contact* (link to the contact subpage), per-locale labels;
+- a navbar: *Services* (anchor into the main page), *Projects* and *Contact* (links to the subpages), per-locale labels;
 - an EN/PL language switcher — locale links pointing at the **equivalent page** in the other locale (main → main, contact → contact) that also persist the clicked locale to `localStorage` so the language detector honours a manual choice on later visits.
 
 ## Architecture
 
-- **Framework:** Astro (latest stable), static output, zero runtime JavaScript except the ~10-line shared language detector serving both unprefixed paths (`/`, `/contact/`) and the one-liner in the language switcher persisting the chosen locale.
+- **Framework:** Astro (latest stable), static output. Runtime JavaScript is limited to **minimal, self-hosted components** bundled at build time and served from the homepage's own origin — currently: the shared language detector on the unprefixed paths (`/`, `/contact/`, `/projects/`), the locale-switcher one-liner, and the featured-projects carousel (`@splidejs/splide`, an npm dependency updated with the project). No external requests at runtime, ever — no CDNs, no third-party origins. *(Supersedes the original "zero runtime JavaScript" rule — decided 2026-07-13 when the featured carousel was added.)*
 - **i18n:** Astro built-in i18n routing with `prefixDefaultLocale: true`. All copy lives in `src/i18n/en.json` and `src/i18n/pl.json` with identical structure; components receive strings from these files, so content edits never touch markup. Locale-invariant data (the projects list) lives in `src/data/`. Each page sets `<html lang>`, and `hreflang` alternate links point between the locale counterparts of the **same page** (`/en/` ↔ `/pl/`, `/en/contact/` ↔ `/pl/contact/`), plus `x-default` → that page's language detector (`/` for the main pages, `/contact/` for the contact subpages).
 - **SEO & social metadata:** per-locale `<title>` and meta description; Open Graph + Twitter card tags with a logo-based preview image; `sitemap.xml` via the official `@astrojs/sitemap` integration; `robots.txt`.
 - **Layout/components:** `src/layouts/Base.astro` (head, nav, footer) + one component per main-page section (`Hero`, `Services`, `Projects`) plus `Contact`, rendered by the contact subpage.
@@ -97,7 +103,8 @@ No test framework — for a static homepage the build is the gate (YAGNI). Post-
 - `https://missing-bits.com/` returns 200 and redirects the browser to `/en/` or `/pl/` by locale.
 - `https://missing-bits.com/en/` and `/pl/` serve the correct locales with correct `lang` and `hreflang` attributes.
 - `https://missing-bits.com/en/contact/` and `/pl/contact/` serve the contact subpage in the right locale.
-- `https://missing-bits.com/contact/` redirects the browser to the locale counterpart, like `/`.
+- `https://missing-bits.com/en/projects/` and `/pl/projects/` serve the projects subpage in the right locale.
+- `https://missing-bits.com/contact/` and `/projects/` redirect the browser to the locale counterpart, like `/`.
 - `https://www.missing-bits.com` redirects to the apex domain.
 - TLS certificate valid for both apex and `www`.
 - Unknown path serves the custom 404 page.

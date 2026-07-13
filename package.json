@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
+    "@splidejs/splide": "^4.1.4",
     "astro": "^7.0.7"
   },
   "devDependencies": {

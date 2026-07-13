@@ -4,13 +4,19 @@
     "title": "salesforce-extractor",
     "url": "https://github.com/vircung/salesforce-extractor",
     "category": "salesforce",
-    "tags": ["Python"]
+    "tags": [
+      "Python"
+    ],
+    "featured": true
   },
   {
     "slug": "salesforce-attachment-download",
     "title": "salesforce-attachment-download",
     "url": "https://github.com/vircung/salesforce-attachment-download",
     "category": "salesforce",
-    "tags": ["Python"]
+    "tags": [
+      "Python"
+    ],
+    "featured": true
   }
 ]

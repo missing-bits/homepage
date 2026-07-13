@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Hero from './Hero.astro';
 import Services from './Services.astro';
-import Projects from './Projects.astro';
+import FeaturedProjects from './FeaturedProjects.astro';
 import type { Locale } from '../i18n';
 
 interface Props { locale: Locale }
@@ -11,5 +11,5 @@ const { locale } = Astro.props;
 <Base locale={locale}>
   <Hero locale={locale} />
   <Services locale={locale} />
-  <Projects locale={locale} />
+  <FeaturedProjects locale={locale} />
 </Base>

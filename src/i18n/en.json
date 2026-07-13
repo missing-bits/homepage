@@ -5,6 +5,7 @@
   },
   "nav": {
     "services": "Services",
+    "projects": "Projects",
     "contact": "Contact"
   },
   "hero": {
@@ -30,6 +31,8 @@
   },
   "projects": {
     "heading": "Projects",
+    "pageTitle": "Projects — Missing Bits",
+    "viewAll": "All projects →",
     "categories": {
       "salesforce": "Salesforce"
     },

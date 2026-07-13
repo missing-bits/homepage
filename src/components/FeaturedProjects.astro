@@ -1,0 +1,67 @@
+---
+import projects from '../data/projects.json';
+import ProjectCard from './ProjectCard.astro';
+import { t, type Locale } from '../i18n';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const s = t(locale);
+const items = (projects as Array<{
+  slug: string;
+  title: string;
+  url: string;
+  category?: string;
+  tags?: string[];
+  featured?: boolean;
+}>).filter((p) => p.featured);
+const descriptions = s.projects.descriptions as Record<string, string>;
+---
+{items.length > 0 && (
+  <section id="projects">
+    <h2>{s.projects.heading}</h2>
+    <div id="featured-projects" class="splide" aria-label={s.projects.heading}>
+      <div class="splide__track">
+        <ul class="splide__list">
+          {items.map((p) => (
+            <li class="splide__slide">
+              <ProjectCard
+                title={p.title}
+                url={p.url}
+                description={descriptions[p.slug] ?? ''}
+                tags={p.tags ?? []}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    <p class="view-all"><a href={`/${locale}/projects/`}>{s.projects.viewAll}</a></p>
+  </section>
+)}
+
+<script>
+  import Splide from '@splidejs/splide';
+  import '@splidejs/splide/css';
+
+  const el = document.querySelector<HTMLElement>('#featured-projects');
+  if (el) {
+    new Splide(el, {
+      perPage: 2,
+      gap: '1.25rem',
+      pagination: true,
+      breakpoints: { 768: { perPage: 1 } },
+    }).mount();
+  }
+</script>
+
+<style is:global>
+  #featured-projects .splide__slide .card { height: 100%; display: block; }
+  #featured-projects .splide__arrow { background: var(--surface); opacity: 0.9; }
+  #featured-projects .splide__arrow svg { fill: var(--brand-cyan); }
+  #featured-projects .splide__pagination__page { background: var(--muted); }
+  #featured-projects .splide__pagination__page.is-active { background: var(--brand-cyan); }
+</style>
+
+<style>
+  .view-all { text-align: right; font-family: var(--font-mono); font-size: 0.9rem; }
+</style>

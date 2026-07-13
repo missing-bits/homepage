@@ -1,5 +1,6 @@
 ---
 import projects from '../data/projects.json';
+import ProjectCard from './ProjectCard.astro';
 import { t, type Locale } from '../i18n';
 
 interface Props { locale: Locale }
@@ -10,6 +11,7 @@ const items = projects as Array<{
   url: string;
   category?: string;
   tags?: string[];
+  featured?: boolean;
 }>;
 const descriptions = s.projects.descriptions as Record<string, string>;
 const categoryLabels = s.projects.categories as Record<string, string>;
@@ -24,21 +26,18 @@ const groups = order.map((cat) => ({
 ---
 {items.length > 0 && (
   <section id="projects">
-    <h2>{s.projects.heading}</h2>
+    <h1 class="section-heading">{s.projects.heading}</h1>
     {groups.map(({ cat, entries }) => (
       <>
-        {cat && <h3 class="project-category">{categoryLabels[cat] ?? cat}</h3>}
+        {cat && <h2 class="project-category">{categoryLabels[cat] ?? cat}</h2>}
         <div class="card-grid">
           {entries.map((p) => (
-            <a class="card" href={p.url}>
-              <h3>{p.title}</h3>
-              <p>{descriptions[p.slug] ?? ''}</p>
-              {(p.tags ?? []).length > 0 && (
-                <ul class="tags">
-                  {p.tags!.map((tag) => <li>{tag}</li>)}
-                </ul>
-              )}
-            </a>
+            <ProjectCard
+              title={p.title}
+              url={p.url}
+              description={descriptions[p.slug] ?? ''}
+              tags={p.tags ?? []}
+            />
           ))}
         </div>
       </>
@@ -54,21 +53,5 @@ const groups = order.map((cat) => ({
     margin: 2rem 0 1rem;
   }
   .project-category::before { content: '# '; color: var(--brand-cyan); }
-
-  .tags {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin: 1rem 0 0;
-    padding: 0;
-  }
-  .tags li {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--brand-cyan);
-    border: 1px solid var(--brand-navy);
-    border-radius: 0.35rem;
-    padding: 0.1rem 0.5rem;
-  }
+  .project-category::after { content: none; }
 </style>

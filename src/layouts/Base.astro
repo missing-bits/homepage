@@ -2,12 +2,14 @@
 import '../styles/global.css';
 import { t, type Locale } from '../i18n';
 
-interface Props { locale: Locale; page?: 'home' | 'contact' }
+interface Props { locale: Locale; page?: 'home' | 'contact' | 'projects' }
 const { locale, page = 'home' } = Astro.props;
 const s = t(locale);
 const site = Astro.site!.origin;
-const subpath = page === 'home' ? '' : 'contact/';
-const title = page === 'contact' ? s.contact.pageTitle : s.meta.title;
+const subpaths = { home: '', contact: 'contact/', projects: 'projects/' } as const;
+const subpath = subpaths[page];
+const titles = { home: s.meta.title, contact: s.contact.pageTitle, projects: s.projects.pageTitle } as const;
+const title = titles[page];
 const ogLocales: Record<Locale, string> = { en: 'en_US', pl: 'pl_PL' };
 const ogLocale = ogLocales[locale];
 const ogLocaleAlternate = ogLocales[locale === 'en' ? 'pl' : 'en'];
@@ -42,6 +44,7 @@ const ogLocaleAlternate = ogLocales[locale === 'en' ? 'pl' : 'en'];
     <header class="site-header">
       <nav class="site-nav">
         <a href={`/${locale}/#services`}>{s.nav.services}</a>
+        <a href={`/${locale}/projects/`}>{s.nav.projects}</a>
         <a href={`/${locale}/contact/`}>{s.nav.contact}</a>
       </nav>
       <nav class="lang-switch">
