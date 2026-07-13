@@ -1,0 +1,17 @@
+---
+import { t, type Locale } from '../i18n';
+
+interface Props { locale: Locale }
+const s = t(Astro.props.locale);
+---
+<section id="services">
+  <h2>{s.services.heading}</h2>
+  <div class="card-grid">
+    {s.services.items.map((item) => (
+      <div class="card">
+        <h3>{item.name}</h3>
+        <p>{item.description}</p>
+      </div>
+    ))}
+  </div>
+</section>

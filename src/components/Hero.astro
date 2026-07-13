@@ -1,0 +1,29 @@
+---
+import { Image } from 'astro:assets';
+import wordmark from '../assets/logo/mbw_wordmark.png';
+import { t, type Locale } from '../i18n';
+
+interface Props { locale: Locale }
+const s = t(Astro.props.locale);
+---
+<section class="hero">
+  <Image src={wordmark} alt="Missing Bits" width={480} densities={[1, 2]} loading="eager" />
+  <p class="tagline">{s.hero.tagline}</p>
+  <p class="about">{s.hero.about}</p>
+</section>
+
+<style>
+  .hero { padding: 4rem 0 1rem; }
+  .hero img { max-width: 100%; height: auto; }
+  .tagline {
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+    margin: 2rem 0 1rem;
+    background: var(--accent-gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    width: fit-content;
+  }
+  .about { color: var(--muted); max-width: 40rem; }
+</style>

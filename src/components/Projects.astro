@@ -1,0 +1,22 @@
+---
+import projects from '../data/projects.json';
+import { t, type Locale } from '../i18n';
+
+interface Props { locale: Locale }
+const s = t(Astro.props.locale);
+const items = projects as Array<{ slug: string; title: string; url: string }>;
+const descriptions = s.projects.descriptions as Record<string, string>;
+---
+{items.length > 0 && (
+  <section id="projects">
+    <h2>{s.projects.heading}</h2>
+    <div class="card-grid">
+      {items.map((p) => (
+        <a class="card" href={p.url}>
+          <h3>{p.title}</h3>
+          <p>{descriptions[p.slug] ?? ''}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+)}

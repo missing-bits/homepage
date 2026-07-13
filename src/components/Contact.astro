@@ -1,0 +1,33 @@
+---
+import company from '../data/company.json';
+import { t, type Locale } from '../i18n';
+
+interface Props { locale: Locale }
+const s = t(Astro.props.locale);
+---
+<section id="contact">
+  <h2>{s.contact.heading}</h2>
+  <p>{s.contact.reachOut} <a href={`mailto:${company.email}`}>{company.email}</a></p>
+  <dl>
+    <dt>{s.contact.githubLabel}</dt>
+    <dd><a href="https://github.com/missing-bits">github.com/missing-bits</a></dd>
+    {company.nip && (
+      <>
+        <dt>{s.contact.nipLabel}</dt>
+        <dd>{company.nip}</dd>
+      </>
+    )}
+    {company.regon && (
+      <>
+        <dt>{s.contact.regonLabel}</dt>
+        <dd>{company.regon}</dd>
+      </>
+    )}
+  </dl>
+</section>
+
+<style>
+  dl { font-family: var(--font-mono); font-size: 0.95rem; }
+  dt { color: var(--muted); float: left; clear: left; min-width: 8rem; }
+  dd { margin: 0 0 0.5rem 9rem; }
+</style>
