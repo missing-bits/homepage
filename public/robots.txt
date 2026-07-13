@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://missing-bits.com/sitemap-index.xml

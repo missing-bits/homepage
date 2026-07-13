@@ -1,0 +1,29 @@
+---
+interface Props { path: string } // '' → /en/ | /pl/ ; 'contact/' → /en/contact/ | /pl/contact/
+const { path } = Astro.props;
+const site = 'https://missing-bits.com';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script is:inline define:vars={{ path }}>
+      var saved = null;
+      try { saved = localStorage.getItem('locale'); } catch (e) {}
+      var target =
+        saved === 'pl' || saved === 'en'
+          ? saved
+          : ((navigator.language || '').toLowerCase().indexOf('pl') === 0 ? 'pl' : 'en');
+      location.replace('/' + target + '/' + path);
+    </script>
+    <meta http-equiv="refresh" content={`2;url=/en/${path}`} />
+    <meta name="robots" content="noindex" />
+    <title>Missing Bits</title>
+    <link rel="alternate" hreflang="en" href={`${site}/en/${path}`} />
+    <link rel="alternate" hreflang="pl" href={`${site}/pl/${path}`} />
+    <link rel="alternate" hreflang="x-default" href={`${site}/${path}`} />
+  </head>
+  <body>
+    <p><a href={`/en/${path}`}>English</a> · <a href={`/pl/${path}`}>Polski</a></p>
+  </body>
+</html>

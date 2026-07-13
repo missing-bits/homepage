@@ -1,0 +1,31 @@
+---
+import '../styles/global.css';
+import { t } from '../i18n';
+const en = t('en');
+const pl = t('pl');
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>{en.notFound.title}</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  </head>
+  <body>
+    <main class="nf">
+      <p class="glitch">01101101 0110100_ 011100__ 0111____</p>
+      <h1>{en.notFound.title}</h1>
+      <p>{en.notFound.body} <a href="/en/">{en.notFound.back}</a></p>
+      <hr />
+      <h1 lang="pl">{pl.notFound.title}</h1>
+      <p lang="pl">{pl.notFound.body} <a href="/pl/">{pl.notFound.back}</a></p>
+    </main>
+    <style>
+      .nf { padding-top: 15vh; text-align: center; }
+      .glitch { font-family: var(--font-mono); color: var(--brand-cyan); letter-spacing: 0.2em; }
+      hr { border: 0; border-top: 1px solid var(--surface); margin: 3rem auto; max-width: 20rem; }
+    </style>
+  </body>
+</html>
