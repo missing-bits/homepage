@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "title": "Missing Bits — tworzenie oprogramowania",
+    "description": "Missing Bits to firma programistyczna: oprogramowanie na zamówienie, konsulting i architektura, automatyzacja i DevOps."
+  },
+  "nav": {
+    "services": "Usługi",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "tagline": "Uzupełniamy brakujące bity.",
+    "about": "Missing Bits to firma programistyczna. Projektujemy i budujemy oprogramowanie na zamówienie, wspieramy zespoły w architekturze i trudnych decyzjach technicznych oraz automatyzujemy drogę od kodu do produkcji."
+  },
+  "services": {
+    "heading": "Czym się zajmujemy",
+    "items": [
+      {
+        "name": "Oprogramowanie na zamówienie",
+        "description": "Aplikacje webowe, usługi i narzędzia wewnętrzne — zaprojektowane, zbudowane i wdrożone od A do Z."
+      },
+      {
+        "name": "Konsulting i architektura",
+        "description": "Projektowanie systemów, przeglądy kodu i architektury oraz praktyczne wsparcie w trudnych decyzjach technicznych."
+      },
+      {
+        "name": "Automatyzacja i DevOps",
+        "description": "Pipeline'y CI/CD, infrastruktura chmurowa i narzędzia deweloperskie, dzięki którym wdrażanie staje się nudne — w najlepszym znaczeniu."
+      }
+    ]
+  },
+  "projects": {
+    "heading": "Projekty",
+    "descriptions": {}
+  },
+  "contact": {
+    "heading": "Kontakt",
+    "pageTitle": "Kontakt — Missing Bits",
+    "reachOut": "Najszybsza droga kontaktu:",
+    "nipLabel": "NIP",
+    "regonLabel": "REGON",
+    "githubLabel": "GitHub"
+  },
+  "notFound": {
+    "title": "404 — tych bitów brakuje",
+    "body": "Strona, której szukasz, nie istnieje.",
+    "back": "Wróć na stronę główną"
+  }
+}

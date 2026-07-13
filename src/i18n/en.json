@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "title": "Missing Bits — software development",
+    "description": "Missing Bits is a software development company: custom software, consulting and architecture, automation and DevOps."
+  },
+  "nav": {
+    "services": "Services",
+    "contact": "Contact"
+  },
+  "hero": {
+    "tagline": "We fill in the missing bits.",
+    "about": "Missing Bits is a software development company. We design and build custom software, help teams with architecture and tough technical decisions, and automate the path from code to production."
+  },
+  "services": {
+    "heading": "What we do",
+    "items": [
+      {
+        "name": "Custom software development",
+        "description": "Web applications, services, and internal tools — designed, built, and shipped end to end."
+      },
+      {
+        "name": "Consulting & architecture",
+        "description": "System design, code and architecture reviews, and hands-on help with hard technical decisions."
+      },
+      {
+        "name": "Automation & DevOps",
+        "description": "CI/CD pipelines, cloud infrastructure, and developer tooling that make shipping boring — in the best way."
+      }
+    ]
+  },
+  "projects": {
+    "heading": "Projects",
+    "descriptions": {}
+  },
+  "contact": {
+    "heading": "Contact",
+    "pageTitle": "Contact — Missing Bits",
+    "reachOut": "The fastest way to reach us:",
+    "nipLabel": "Tax ID (NIP)",
+    "regonLabel": "REGON",
+    "githubLabel": "GitHub"
+  },
+  "notFound": {
+    "title": "404 — these bits are missing",
+    "body": "The page you're looking for doesn't exist.",
+    "back": "Back to the homepage"
+  }
+}
