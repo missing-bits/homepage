@@ -22,9 +22,14 @@ body {
   color: var(--text);
   font-family: var(--font-sans);
   line-height: 1.6;
+  /* Sticky footer: the footer sits at the viewport's bottom edge when the
+     content is too short to push it there naturally. */
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
 }
 
-main { max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; }
+main { max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; width: 100%; flex: 1; }
 
 h1, h2 { line-height: 1.2; }
 
