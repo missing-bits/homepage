@@ -54,6 +54,13 @@ a:hover { text-decoration: underline; }
   padding: 1rem 1.5rem;
   font-family: var(--font-mono);
   font-size: 0.9rem;
+  /* Keep the navbar visible while scrolling. */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--surface);
 }
 
 .site-nav { display: flex; gap: 1.25rem; }
