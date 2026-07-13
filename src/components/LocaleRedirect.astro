@@ -1,22 +1,24 @@
 ---
 interface Props { path: string } // '' → /en/ | /pl/ ; 'contact/' → /en/contact/ | /pl/contact/
 const { path } = Astro.props;
-const site = 'https://missing-bits.com';
+const fallbackLocale = 'en';
+const site = Astro.site!.origin;
 ---
 <!doctype html>
-<html lang="en">
+<html lang={fallbackLocale}>
   <head>
     <meta charset="utf-8" />
-    <script is:inline define:vars={{ path }}>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline define:vars={{ path, fallbackLocale }}>
       var saved = null;
       try { saved = localStorage.getItem('locale'); } catch (e) {}
       var target =
         saved === 'pl' || saved === 'en'
           ? saved
-          : ((navigator.language || '').toLowerCase().indexOf('pl') === 0 ? 'pl' : 'en');
+          : ((navigator.language || '').toLowerCase().indexOf('pl') === 0 ? 'pl' : fallbackLocale);
       location.replace('/' + target + '/' + path);
     </script>
-    <meta http-equiv="refresh" content={`2;url=/en/${path}`} />
+    <meta http-equiv="refresh" content={`2;url=/${fallbackLocale}/${path}`} />
     <meta name="robots" content="noindex" />
     <title>Missing Bits</title>
     <link rel="alternate" hreflang="en" href={`${site}/en/${path}`} />

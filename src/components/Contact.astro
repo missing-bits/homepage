@@ -6,7 +6,7 @@ interface Props { locale: Locale }
 const s = t(Astro.props.locale);
 ---
 <section id="contact">
-  <h2>{s.contact.heading}</h2>
+  <h1 class="section-heading">{s.contact.heading}</h1>
   <p>{s.contact.reachOut} <a href={`mailto:${company.email}`}>{company.email}</a></p>
   <dl>
     <dt>{s.contact.githubLabel}</dt>

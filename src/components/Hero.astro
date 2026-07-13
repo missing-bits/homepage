@@ -8,7 +8,7 @@ const s = t(Astro.props.locale);
 ---
 <section class="hero">
   <Image src={wordmark} alt="Missing Bits" width={480} densities={[1, 2]} loading="eager" />
-  <p class="tagline">{s.hero.tagline}</p>
+  <h1 class="tagline">{s.hero.tagline}</h1>
   <p class="about">{s.hero.about}</p>
 </section>
 
@@ -18,6 +18,8 @@ const s = t(Astro.props.locale);
   .tagline {
     font-family: var(--font-mono);
     font-size: 1.4rem;
+    font-weight: normal;
+    line-height: 1.6;
     margin: 2rem 0 1rem;
     background: var(--accent-gradient);
     background-clip: text;
