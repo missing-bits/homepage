@@ -1,7 +1,7 @@
 ---
 ticket: none
 date: 2026-07-13
-status: approved
+status: implemented
 grilled: 2026-07-13
 architect: LGTM
 branch: feature/homepage
