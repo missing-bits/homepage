@@ -4,7 +4,13 @@ import { t, type Locale } from '../i18n';
 
 interface Props { locale: Locale }
 const s = t(Astro.props.locale);
-const items = projects as Array<{ slug: string; title: string; url: string; category?: string }>;
+const items = projects as Array<{
+  slug: string;
+  title: string;
+  url: string;
+  category?: string;
+  tags?: string[];
+}>;
 const descriptions = s.projects.descriptions as Record<string, string>;
 const categoryLabels = s.projects.categories as Record<string, string>;
 // Group by category preserving first-appearance order; uncategorized ('') first.
@@ -27,6 +33,11 @@ const groups = order.map((cat) => ({
             <a class="card" href={p.url}>
               <h3>{p.title}</h3>
               <p>{descriptions[p.slug] ?? ''}</p>
+              {(p.tags ?? []).length > 0 && (
+                <ul class="tags">
+                  {p.tags!.map((tag) => <li>{tag}</li>)}
+                </ul>
+              )}
             </a>
           ))}
         </div>
@@ -43,4 +54,21 @@ const groups = order.map((cat) => ({
     margin: 2rem 0 1rem;
   }
   .project-category::before { content: '# '; color: var(--brand-cyan); }
+
+  .tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 1rem 0 0;
+    padding: 0;
+  }
+  .tags li {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--brand-cyan);
+    border: 1px solid var(--brand-navy);
+    border-radius: 0.35rem;
+    padding: 0.1rem 0.5rem;
+  }
 </style>
