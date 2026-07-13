@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "slug": "salesforce-extractor",
+    "title": "salesforce-extractor",
+    "url": "https://github.com/vircung/salesforce-extractor",
+    "category": "salesforce"
+  },
+  {
+    "slug": "salesforce-attachment-download",
+    "title": "salesforce-attachment-download",
+    "url": "https://github.com/vircung/salesforce-attachment-download",
+    "category": "salesforce"
+  }
+]

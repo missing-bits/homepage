@@ -30,7 +30,13 @@
   },
   "projects": {
     "heading": "Projects",
-    "descriptions": {}
+    "categories": {
+      "salesforce": "Salesforce"
+    },
+    "descriptions": {
+      "salesforce-extractor": "Python tool for extracting data from Salesforce orgs.",
+      "salesforce-attachment-download": "Bulk downloader for Salesforce attachments and files."
+    }
   },
   "contact": {
     "heading": "Contact",

@@ -45,7 +45,7 @@ Changing the default locale later is a one-line config change (`astro.config` i1
 
 1. **Hero** — logo (dark-background variant), company name, tagline, 2–3 sentences about the company and its software-services scope.
 2. **Services** — cards for the service offering (e.g. custom software development, consulting/architecture, automation & DevOps). Exact list is content, easily edited in JSON.
-3. **Projects** — hand-maintained list of selected projects linking to GitHub repositories in both the `missing-bits` organization and the `vircung` personal account. Locale-invariant data (title, repository URL) lives once in a shared `src/data/projects.json`; only the one-sentence descriptions live per locale in the i18n files, keyed by project slug — so the list cannot drift between locales. No GitHub API involved — updating the list is a content edit. The list launches empty — the section stays hidden until selected repositories are migrated to the `missing-bits` organization with updated licenses/copyright.
+3. **Projects** — hand-maintained list of selected projects linking to GitHub repositories in both the `missing-bits` organization and the `vircung` personal account. Locale-invariant data (title, repository URL, optional `category` slug) lives once in a shared `src/data/projects.json`; the one-sentence descriptions and the category labels live per locale in the i18n files, keyed by slug — so the list cannot drift between locales. Entries are rendered grouped by category (per-locale subheadings); uncategorized entries form an unlabeled group first. No GitHub API involved — updating the list is a content edit. An empty list hides the whole section.
 
 ### Contact subpage (per locale)
 

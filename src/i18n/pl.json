@@ -30,7 +30,13 @@
   },
   "projects": {
     "heading": "Projekty",
-    "descriptions": {}
+    "categories": {
+      "salesforce": "Salesforce"
+    },
+    "descriptions": {
+      "salesforce-extractor": "Narzędzie w Pythonie do ekstrakcji danych z orgów Salesforce.",
+      "salesforce-attachment-download": "Masowe pobieranie załączników i plików z Salesforce."
+    }
   },
   "contact": {
     "heading": "Kontakt",

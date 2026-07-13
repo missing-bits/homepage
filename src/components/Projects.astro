@@ -4,19 +4,43 @@ import { t, type Locale } from '../i18n';
 
 interface Props { locale: Locale }
 const s = t(Astro.props.locale);
-const items = projects as Array<{ slug: string; title: string; url: string }>;
+const items = projects as Array<{ slug: string; title: string; url: string; category?: string }>;
 const descriptions = s.projects.descriptions as Record<string, string>;
+const categoryLabels = s.projects.categories as Record<string, string>;
+// Group by category preserving first-appearance order; uncategorized ('') first.
+const order = [...new Set(items.map((p) => p.category ?? ''))].sort((a, b) =>
+  a === '' ? -1 : b === '' ? 1 : 0
+);
+const groups = order.map((cat) => ({
+  cat,
+  entries: items.filter((p) => (p.category ?? '') === cat),
+}));
 ---
 {items.length > 0 && (
   <section id="projects">
     <h2>{s.projects.heading}</h2>
-    <div class="card-grid">
-      {items.map((p) => (
-        <a class="card" href={p.url}>
-          <h3>{p.title}</h3>
-          <p>{descriptions[p.slug] ?? ''}</p>
-        </a>
-      ))}
-    </div>
+    {groups.map(({ cat, entries }) => (
+      <>
+        {cat && <h3 class="project-category">{categoryLabels[cat] ?? cat}</h3>}
+        <div class="card-grid">
+          {entries.map((p) => (
+            <a class="card" href={p.url}>
+              <h3>{p.title}</h3>
+              <p>{descriptions[p.slug] ?? ''}</p>
+            </a>
+          ))}
+        </div>
+      </>
+    ))}
   </section>
 )}
+
+<style>
+  .project-category {
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    color: var(--muted);
+    margin: 2rem 0 1rem;
+  }
+  .project-category::before { content: '# '; color: var(--brand-cyan); }
+</style>
