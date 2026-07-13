@@ -24,6 +24,7 @@ The bilingual (EN/PL) static homepage of Missing Bits, a software-development co
 
 - Blog, CMS, analytics, cookie banners, contact forms, or any backend.
 - Client-acquisition landing funnel (may come later).
+- Client-deliveries subpage (working name `/work/`, PL "Realizacje") — deliberately deferred until the first client delivery exists; that page (not the projects list) is also where per-entry screenshots/graphics will land. Its featured entries will join the existing main-page carousel (shared `featured` flag), not get a second one.
 
 ## Homepage structure
 
@@ -47,11 +48,11 @@ Changing the default locale later is a one-line config change (`astro.config` i1
 
 1. **Hero** — logo (dark-background variant), company name, tagline, 2–3 sentences about the company and its software-services scope.
 2. **Services** — cards for the service offering (e.g. custom software development, consulting/architecture, automation & DevOps). Exact list is content, easily edited in JSON.
-3. **Featured projects** — a carousel (self-hosted Splide component, CSS+JS bundled at build) teasing the projects marked `featured: true`, with an "All projects →" link to the projects subpage. No featured entries → the section disappears.
+3. **Featured** — a single carousel (self-hosted Splide component, CSS+JS bundled at build) teasing entries marked `featured: true`, with an "All projects →" link to the projects subpage. Today it draws only from the projects list; once client deliveries exist, their featured entries join the same carousel (one carousel, never two). No featured entries → the section disappears.
 
 ### Projects subpage (per locale)
 
-The full hand-maintained projects list (`/en/projects/`, `/pl/projects/`) — open-source repositories (from the `missing-bits` organization or the `vircung` personal account) and client deliveries alike; a project's `url` may point at a repository or a live product. Locale-invariant data (title, URL, optional `category` slug, optional `tags` list of technology names rendered as chips — technology names are proper nouns, never translated, plus the `featured` flag) lives once in a shared `src/data/projects.json`; the one-sentence descriptions and the category labels live per locale in the i18n files, keyed by slug — so the list cannot drift between locales. Entries render grouped by category (per-locale subheadings); uncategorized entries form an unlabeled group first. No GitHub API involved — updating the list is a content edit. An empty list hides the section.
+The full hand-maintained projects list (`/en/projects/`, `/pl/projects/`), opened by a short per-locale intro stating these are Missing Bits' own implementations — Missing Bits' **own** work only: open-source repositories (from the `missing-bits` organization or the `vircung` personal account) or own products; a project's `url` may point at a repository or a live product. Client deliveries are a separate concept and never appear here (see Non-goals). Locale-invariant data (title, URL, optional `category` slug, optional `tags` list of technology names rendered as chips — technology names are proper nouns, never translated, plus the `featured` flag) lives once in a shared `src/data/projects.json`; the one-sentence descriptions and the category labels live per locale in the i18n files, keyed by slug — so the list cannot drift between locales. Entries render grouped by category (per-locale subheadings); uncategorized entries form an unlabeled group first. No GitHub API involved — updating the list is a content edit. An empty list hides the section.
 
 ### Contact subpage (per locale)
 
@@ -59,16 +60,16 @@ Contact lives on its own subpage (`/en/contact/`, `/pl/contact/`), not on the ma
 
 ### Header navigation
 
-Every page shares a header with:
+Every page shares a **sticky** header (pinned to the viewport top while scrolling, translucent over content) with:
 - a navbar: *Services* (anchor into the main page), *Projects* and *Contact* (links to the subpages), per-locale labels;
 - an EN/PL language switcher — locale links pointing at the **equivalent page** in the other locale (main → main, contact → contact) that also persist the clicked locale to `localStorage` so the language detector honours a manual choice on later visits.
 
 ## Architecture
 
 - **Framework:** Astro (latest stable), static output. Runtime JavaScript is limited to **minimal, self-hosted components** bundled at build time and served from the homepage's own origin — currently: the shared language detector on the unprefixed paths (`/`, `/contact/`, `/projects/`), the locale-switcher one-liner, and the featured-projects carousel (`@splidejs/splide`, an npm dependency updated with the project). No external requests at runtime, ever — no CDNs, no third-party origins. *(Supersedes the original "zero runtime JavaScript" rule — decided 2026-07-13 when the featured carousel was added.)*
-- **i18n:** Astro built-in i18n routing with `prefixDefaultLocale: true`. All copy lives in `src/i18n/en.json` and `src/i18n/pl.json` with identical structure; components receive strings from these files, so content edits never touch markup. Locale-invariant data (the projects list) lives in `src/data/`. Each page sets `<html lang>`, and `hreflang` alternate links point between the locale counterparts of the **same page** (`/en/` ↔ `/pl/`, `/en/contact/` ↔ `/pl/contact/`), plus `x-default` → that page's language detector (`/` for the main pages, `/contact/` for the contact subpages).
+- **i18n:** Astro built-in i18n routing with `prefixDefaultLocale: true`. All copy lives in `src/i18n/en.json` and `src/i18n/pl.json` with identical structure; components receive strings from these files, so content edits never touch markup. Locale-invariant data (the projects list) lives in `src/data/`. Each page sets `<html lang>`, and `hreflang` alternate links point between the locale counterparts of the **same page** (`/en/` ↔ `/pl/`, `/en/contact/` ↔ `/pl/contact/`), plus `x-default` → that page's language detector (`/` for the main pages, `/contact/` and `/projects/` for the subpages).
 - **SEO & social metadata:** per-locale `<title>` and meta description; Open Graph + Twitter card tags with a logo-based preview image; `sitemap.xml` via the official `@astrojs/sitemap` integration; `robots.txt`.
-- **Layout/components:** `src/layouts/Base.astro` (head, nav, footer) + one component per main-page section (`Hero`, `Services`, `Projects`) plus `Contact`, rendered by the contact subpage.
+- **Layout/components:** `src/layouts/Base.astro` (head, nav, footer) + one component per main-page section (`Hero`, `Services`, `FeaturedProjects` — the Featured carousel) plus `Projects` (the full grouped list, rendered by the projects subpage), `Contact` (rendered by the contact subpage), and the shared `ProjectCard`.
 - **Styling:** dark, technical-minimal. Palette derived from the existing logo (navy → blue → cyan gradient of the faceted hexagon), monospace accents, subtle "bits" motif. Plain CSS (or minimal scoped Astro styles) — no CSS framework.
 - **Branding assets:** existing logo pack (faceted hexagon "M" + "MissingBits" wordmark; light/dark and mono variants) committed under `src/assets/` (optimized by Astro at build time); favicon files derived from the hexagon mark live in `public/`.
 - **Toolchain:** Node pinned via `mise.toml` in the repo; Astro and all build deps are local npm dependencies (`package.json`), nothing global on the host.

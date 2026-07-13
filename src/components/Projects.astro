@@ -27,6 +27,7 @@ const groups = order.map((cat) => ({
 {items.length > 0 && (
   <section id="projects">
     <h1 class="section-heading">{s.projects.heading}</h1>
+    <p class="intro">{s.projects.intro}</p>
     {groups.map(({ cat, entries }) => (
       <>
         {cat && <h2 class="project-category">{categoryLabels[cat] ?? cat}</h2>}
@@ -54,4 +55,5 @@ const groups = order.map((cat) => ({
   }
   .project-category::before { content: '# '; color: var(--brand-cyan); }
   .project-category::after { content: none; }
+  .intro { color: var(--muted); max-width: 40rem; margin: -0.5rem 0 2rem; }
 </style>

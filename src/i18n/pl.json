@@ -32,6 +32,7 @@
   "projects": {
     "heading": "Projekty",
     "pageTitle": "Projekty — Missing Bits",
+    "intro": "Autorskie projekty Missing Bits: narzędzia open-source i własne implementacje, które budujemy i utrzymujemy.",
     "viewAll": "Wszystkie projekty →",
     "categories": {
       "salesforce": "Salesforce"
