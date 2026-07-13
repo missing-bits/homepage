@@ -1,0 +1,78 @@
+/* Palette derived from the Missing Bits logo (navy → blue → cyan faceted hexagon). */
+:root {
+  --bg: #0b1020;
+  --surface: #131a2e;
+  --text: #e6ecf5;
+  --muted: #93a1b8;
+  --brand-navy: #1b3f7a;
+  --brand-blue: #2478d4;
+  --brand-cyan: #4fc3f7;
+  --accent-gradient: linear-gradient(135deg, var(--brand-navy), var(--brand-blue), var(--brand-cyan));
+  --font-mono: ui-monospace, 'Cascadia Code', 'JetBrains Mono', Menlo, Consolas, monospace;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+
+main { max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; }
+
+h1, h2 { line-height: 1.2; }
+
+h2 {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  margin: 4rem 0 1.5rem;
+}
+
+h2::before { content: '// '; color: var(--brand-cyan); }
+
+a { color: var(--brand-cyan); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+.site-nav { display: flex; gap: 1.25rem; }
+.site-nav a { color: var(--text); }
+
+.lang-switch a { color: var(--muted); padding: 0.25rem 0.5rem; }
+.lang-switch a[aria-current='true'] { color: var(--text); border-bottom: 2px solid var(--brand-cyan); }
+
+.site-footer {
+  margin-top: 5rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--surface);
+}
+
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.25rem; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid #1e2942;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+
+.card h3 { margin-top: 0; font-size: 1.05rem; }
+.card p { color: var(--muted); margin-bottom: 0; }

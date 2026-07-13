@@ -1,0 +1,56 @@
+---
+import '../styles/global.css';
+import { t, type Locale } from '../i18n';
+
+interface Props { locale: Locale; page?: 'home' | 'contact' }
+const { locale, page = 'home' } = Astro.props;
+const s = t(locale);
+const site = 'https://missing-bits.com';
+const subpath = page === 'home' ? '' : 'contact/';
+const title = page === 'contact' ? s.contact.pageTitle : s.meta.title;
+---
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={s.meta.description} />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="canonical" href={`${site}/${locale}/${subpath}`} />
+    <link rel="alternate" hreflang="en" href={`${site}/en/${subpath}`} />
+    <link rel="alternate" hreflang="pl" href={`${site}/pl/${subpath}`} />
+    <link rel="alternate" hreflang="x-default" href={`${site}/${subpath}`} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={s.meta.description} />
+    <meta property="og:url" content={`${site}/${locale}/${subpath}`} />
+    <meta property="og:image" content={`${site}/og-image.png`} />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="site-nav">
+        <a href={`/${locale}/#services`}>{s.nav.services}</a>
+        <a href={`/${locale}/contact/`}>{s.nav.contact}</a>
+      </nav>
+      <nav class="lang-switch">
+        <a href={`/en/${subpath}`} data-locale="en" aria-current={locale === 'en' ? 'true' : 'false'}>EN</a>
+        <a href={`/pl/${subpath}`} data-locale="pl" aria-current={locale === 'pl' ? 'true' : 'false'}>PL</a>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      © {new Date().getFullYear()} Missing Bits
+    </footer>
+    <script is:inline>
+      document.querySelectorAll('[data-locale]').forEach((a) => {
+        a.addEventListener('click', () => localStorage.setItem('locale', a.dataset.locale));
+      });
+    </script>
+  </body>
+</html>
