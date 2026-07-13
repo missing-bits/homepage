@@ -1,2 +1,40 @@
 [tools]
 node = "24"
+gh = "2"
+
+[tasks.install]
+description = "Install npm dependencies"
+run = "npm install"
+
+[tasks.dev]
+description = "Dev server with live reload at http://localhost:4321 (Astro HMR watches src/)"
+run = "npm run dev"
+
+[tasks.build]
+description = "Build the homepage into dist/ (runs the i18n parity check via prebuild)"
+run = "npm run build"
+
+[tasks.preview]
+description = "Serve the built dist/ at http://localhost:4321 (no reload — production-like)"
+depends = ["build"]
+run = "npm run preview"
+
+[tasks.icons]
+description = "Regenerate favicons and the OG image from src/assets/logo/"
+run = "npm run icons"
+
+[tasks.deploy]
+description = "Deploy to https://missing-bits.com — pushes master; refuses on any other branch"
+depends = ["build"]
+confirm = "Push master to origin (triggers the production deploy)?"
+run = '''
+#!/usr/bin/env bash
+set -euo pipefail
+branch=$(git branch --show-current)
+if [ "$branch" != "master" ]; then
+  echo "Refusing to deploy: you are on '$branch', not master." >&2
+  echo "Merge your work into master first (e.g. git switch master && git merge $branch)." >&2
+  exit 1
+fi
+git push origin master
+'''
