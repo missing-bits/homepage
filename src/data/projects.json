@@ -18,5 +18,17 @@
       "Python"
     ],
     "featured": true
+  },
+  {
+    "slug": "ai-devcontainer",
+    "title": "ai-devcontainer",
+    "url": "https://github.com/missing-bits/ai-devcontainer",
+    "category": "devtools",
+    "tags": [
+      "Docker",
+      "Shell",
+      "mise"
+    ],
+    "featured": true
   }
 ]

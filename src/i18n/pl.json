@@ -35,11 +35,13 @@
     "intro": "Autorskie narzędzia i implementacje — budujemy je i utrzymujemy.",
     "viewAll": "Wszystkie projekty →",
     "categories": {
-      "salesforce": "Salesforce"
+      "salesforce": "Salesforce",
+      "devtools": "Narzędzia deweloperskie"
     },
     "descriptions": {
       "salesforce-extractor": "Narzędzie w Pythonie do ekstrakcji danych z orgów Salesforce.",
-      "salesforce-attachment-download": "Masowe pobieranie załączników i plików z Salesforce."
+      "salesforce-attachment-download": "Masowe pobieranie załączników i plików z Salesforce.",
+      "ai-devcontainer": "Dev container dla CLI agentów AI (Claude Code, Codex) z izolowanymi profilami środowisk i trwałym stanem agentów."
     }
   },
   "contact": {

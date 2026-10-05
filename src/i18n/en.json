@@ -35,11 +35,13 @@
     "intro": "Our own tools and implementations — built and maintained by Missing Bits.",
     "viewAll": "All projects →",
     "categories": {
-      "salesforce": "Salesforce"
+      "salesforce": "Salesforce",
+      "devtools": "Developer tools"
     },
     "descriptions": {
       "salesforce-extractor": "Python tool for extracting data from Salesforce orgs.",
-      "salesforce-attachment-download": "Bulk downloader for Salesforce attachments and files."
+      "salesforce-attachment-download": "Bulk downloader for Salesforce attachments and files.",
+      "ai-devcontainer": "Dev container for AI coding agent CLIs (Claude Code, Codex) with isolated environment profiles and persistent agent state."
     }
   },
   "contact": {
