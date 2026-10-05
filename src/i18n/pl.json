@@ -41,7 +41,8 @@
     "descriptions": {
       "salesforce-extractor": "Narzędzie w Pythonie do ekstrakcji danych z orgów Salesforce.",
       "salesforce-attachment-download": "Masowe pobieranie załączników i plików z Salesforce.",
-      "ai-devcontainer": "Dev container dla CLI agentów AI (Claude Code, Codex) z izolowanymi profilami środowisk i trwałym stanem agentów."
+      "ai-devcontainer": "Dev container dla CLI agentów AI (Claude Code, Codex) z izolowanymi profilami środowisk i trwałym stanem agentów.",
+      "claude-plugins": "Marketplace pluginów do Claude Code: proces pracy oparty na specyfikacjach, standardy kodowania Python i Salesforce oraz pamięć projektowa w repozytorium."
     }
   },
   "contact": {

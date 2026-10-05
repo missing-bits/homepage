@@ -30,5 +30,17 @@
       "mise"
     ],
     "featured": true
+  },
+  {
+    "slug": "claude-plugins",
+    "title": "claude-plugins",
+    "url": "https://github.com/missing-bits/claude-plugins",
+    "category": "devtools",
+    "tags": [
+      "Claude Code",
+      "Python",
+      "Shell"
+    ],
+    "featured": true
   }
 ]
